@@ -3,15 +3,57 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>bankaii</title>
+  <title>Aizen Sousuke</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <main class="hero">
-    <p class="eyebrow">Welcome</p>
-    <h1>bankaii</h1>
-    <p class="intro">Enter the next page to watch the featured video.</p>
-    <a class="button" href="video.html">Watch the video <span aria-hidden="true">→</span></a>
+  <div class="glow glow-one" aria-hidden="true"></div>
+  <div class="glow glow-two" aria-hidden="true"></div>
+
+  <main class="aizen-page">
+    <p class="eyebrow">The perfect illusion</p>
+    <h1>Aizen <span>Sousuke</span> Aizen</h1>
+    <p class="tagline">Admire the view. The illusion has already begun.</p>
+    <button class="enter-button" id="enter-button" type="button">Enter the illusion <span aria-hidden="true">→</span></button>
+    <p class="audio-status" id="audio-status" role="status"></p>
   </main>
+
+  <audio id="voice-one" src="Yokoso-watashi-no-soul-society.mp3" preload="auto"></audio>
+  <audio id="voice-two" src="yare-yare-1.mp3" preload="auto"></audio>
+  <script>
+    const enterButton = document.querySelector('#enter-button');
+    const audioStatus = document.querySelector('#audio-status');
+    const voices = [
+      document.querySelector('#voice-one'),
+      document.querySelector('#voice-two')
+    ];
+
+    let clickCount = 0;
+    let sequenceStarted = false;
+
+    enterButton.addEventListener('click', async () => {
+      clickCount += 1;
+
+      if (clickCount < 3 || sequenceStarted) {
+        return;
+      }
+
+      sequenceStarted = true;
+      enterButton.disabled = true;
+
+      try {
+        await voices[0].play();
+        voices[0].addEventListener('ended', () => voices[1].play(), { once: true });
+        voices[1].addEventListener('ended', () => {
+          window.location.href = 'transition.html';
+        }, { once: true });
+      } catch (error) {
+        enterButton.disabled = false;
+        sequenceStarted = false;
+        audioStatus.textContent = 'Audio could not start. Check the audio files and try again.';
+        console.error('Unable to start background audio:', error);
+      }
+    });
+  </script>
 </body>
 </html>
