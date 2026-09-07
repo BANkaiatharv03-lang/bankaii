@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aizen | The Blade</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="transition-body">
+  <main class="transition-page">
+    <div class="sword-reveal">
+      <img src="aizen-sword.jpe" alt="Aizen's sword">
+    </div>
+    <section class="video-section" aria-label="Featured video">
+      <p class="eyebrow">The illusion continues</p>
+      <h1>Witness the next scene</h1>
+      <div class="video-frame">
+        <iframe
+          src="https://www.youtube.com/embed/tsf4TMl9AcQ"
+          title="YouTube video"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen>
+        </iframe>
+      </div>
+      <a class="watch-link" href="https://www.youtube.com/watch?v=tsf4TMl9AcQ" target="_blank" rel="noopener noreferrer">Watch on YouTube ↗</a>
+    </section>
+  </main>
+  <audio id="sword-voice" src="hado-99-goryutenmetsu.mp3" autoplay preload="auto"></audio>
+  <script>
+    const swordVoice = document.querySelector('#sword-voice');
+    swordVoice.play().catch((error) => {
+      console.warn('Transition voice requires page interaction:', error);
+    });
+  </script>
+</body>
+</html>
